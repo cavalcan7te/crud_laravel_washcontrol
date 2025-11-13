@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
+use App\Models\Customer;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class CustomerController extends Controller
 {
@@ -21,7 +22,7 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        //
+        return view("customers.create");
     }
 
     /**
@@ -29,7 +30,8 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Customer::create($request->all());
+        return redirect()->route("customers.index");
     }
 
     /**
@@ -45,7 +47,8 @@ class CustomerController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $customer = Book::findOrfail($id);
+        return view("customers.edit", compact('customers'));
     }
 
     /**
