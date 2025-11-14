@@ -16,6 +16,7 @@
             <th>Placa do Veículo</th>
             <th>Criado em</th>
             <th>Atualizado em</th>
+            <th>Ações</th>
         </tr>
     </thead>
 
@@ -28,11 +29,26 @@
                 <td>{{ $customer->vehicle_plate }}</td>
                 <td>{{ $customer->created_at }}</td>
                 <td>{{ $customer->updated_at }}</td>
+                <td>
+                    <a href="{{ route('customers.edit', $customer->id) }}" class="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600">
+                        Editar
+                    </a>
+                    <form action="{{ route('customers.destroy', $customer->id) }}" method="POST" class="inline">
+                        @csrf
+                        @method('DELETE')
+
+                        <button type="submit"
+                            class="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600"
+                            onclick="return confirm('Tem certeza que deseja excluir?')">
+                            Apagar
+                        </button>
+                    </form>
+                </td>
             </tr>
         @endforeach
     </tbody>
 </table>
-<a href="{{ route('customers.create') }}">Criar novo cliente</a>
+<a href="{{ route('customers.create') }}">Cadastrar novo cliente</a>
 
 
 </body>

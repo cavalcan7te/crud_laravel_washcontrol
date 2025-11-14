@@ -47,8 +47,8 @@ class CustomerController extends Controller
      */
     public function edit(string $id)
     {
-        $customer = Book::findOrfail($id);
-        return view("customers.edit", compact('customers'));
+        $customer = Customer::findOrfail($id);
+        return view("customers.edit", compact('customer'));
     }
 
     /**
@@ -56,7 +56,9 @@ class CustomerController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $customer = Customer::findOrfail($id);
+        $customer->update($request->all());
+        return redirect()->route("customers.index");
     }
 
     /**
@@ -64,6 +66,8 @@ class CustomerController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $customer = Customer::findOrfail($id);
+        $customer->delete();
+        return redirect()->route("customers.index");
     }
 }
