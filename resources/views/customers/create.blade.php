@@ -1,35 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WashControl</title>
+    <title>Cadastrar Serviço</title>
 </head>
 <body>
-    <h1>Cadastre</h1>
 
-    <form action="{{ route('customers.store') }}" method="POST" style="display: flex; flex-direction: column; gap: 10px; width: 300px;">
-    @csrf
+    <h1>Cadastrar Novo Serviço</h1>
 
-    <label>
-        Nome:
-        <input type="text" name="name" required>
-    </label>
+    <form action="{{ route('services.store') }}" method="POST">
+        @csrf
 
-    <label>
-        Telefone:
-        <input type="text" name="phone" required>
-    </label>
+        <label>Nome:</label><br>
+        <input type="text" name="name" required><br><br>
 
-    <label>
-        Placa do veículo:
-        <input type="text" name="vehicle_plate" required>
-    </label>
+        <label>Descrição:</label><br>
+        <textarea name="description" rows="4" required></textarea><br><br>
 
-    <button type="submit" style="padding: 8px; background: black; color: white; border: none;">
-        Salvar
-    </button>
-</form>
+        <label>Preço (R$):</label><br>
+        <input type="number" step="0.01" name="price" required><br><br>
+
+        <button type="submit">Salvar</button>
+    </form>
+
+    <br>
+    <a href="{{ route('services.index') }}">Voltar</a>
 
 </body>
 </html>
