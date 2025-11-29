@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
+use App\Models\Service;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class ServiceController extends Controller
 {
@@ -12,7 +13,9 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        //
+        // Aqui usamos $services (plural) pois é uma coleção de itens
+        $services = Service::all();
+        return view("services.index", compact('services'));
     }
 
     /**
@@ -20,7 +23,7 @@ class ServiceController extends Controller
      */
     public function create()
     {
-        //
+        return view("services.create");
     }
 
     /**
@@ -28,7 +31,8 @@ class ServiceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Service::create($request->all());
+        return redirect()->route("services.index");
     }
 
     /**
@@ -36,7 +40,7 @@ class ServiceController extends Controller
      */
     public function show(string $id)
     {
-        //
+        // (Este método não está implementado, mas está correto)
     }
 
     /**
@@ -44,7 +48,9 @@ class ServiceController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        // CORREÇÃO: Usando $service (singular) para um único item.
+        $service = Service::findOrfail($id);
+        return view("services.edit", compact('service'));
     }
 
     /**
@@ -52,7 +58,10 @@ class ServiceController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        // CORREÇÃO: Usando $service (singular) para um único item.
+        $service = Service::findOrfail($id);
+        $service->update($request->all());
+        return redirect()->route("services.index");
     }
 
     /**
@@ -60,6 +69,9 @@ class ServiceController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        // CORREÇÃO: Usando $service (singular) para um único item.
+        $service = Service::findOrfail($id);
+        $service->delete();
+        return redirect()->route("services.index");
     }
 }
