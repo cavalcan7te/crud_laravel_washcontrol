@@ -13,7 +13,6 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        // Aqui usamos $services (plural) pois é uma coleção de itens
         $services = Service::all();
         return view("services.index", compact('services'));
     }
@@ -48,7 +47,6 @@ class ServiceController extends Controller
      */
     public function edit(string $id)
     {
-        // CORREÇÃO: Usando $service (singular) para um único item.
         $service = Service::findOrfail($id);
         return view("services.edit", compact('service'));
     }
@@ -58,7 +56,6 @@ class ServiceController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        // CORREÇÃO: Usando $service (singular) para um único item.
         $service = Service::findOrfail($id);
         $service->update($request->all());
         return redirect()->route("services.index");
@@ -69,7 +66,6 @@ class ServiceController extends Controller
      */
     public function destroy(string $id)
     {
-        // CORREÇÃO: Usando $service (singular) para um único item.
         $service = Service::findOrfail($id);
         $service->delete();
         return redirect()->route("services.index");
