@@ -3,29 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastrar Serviço</title>
+    <title>Criar Cliente</title>
 </head>
 <body>
 
-    <h1>Cadastrar Novo Serviço</h1>
+<h1>Cadastrar Cliente</h1>
 
-    <form action="{{ route('services.store') }}" method="POST">
-        @csrf
+<form action="{{ route('customers.store') }}" method="POST">
+    @csrf
 
-        <label>Nome:</label><br>
-        <input type="text" name="name" required><br><br>
+    <label>Nome:</label><br>
+    <input type="text" name="name" required><br><br>
 
-        <label>Descrição:</label><br>
-        <textarea name="description" rows="4" required></textarea><br><br>
+    <label>Telefone:</label><br>
+    <input type="text" name="phone" required><br><br>
 
-        <label>Preço (R$):</label><br>
-        <input type="number" step="0.01" name="price" required><br><br>
+    <button type="submit">Salvar</button>
+</form>
 
-        <button type="submit">Salvar</button>
-    </form>
-
-    <br>
-    <a href="{{ route('services.index') }}">Voltar</a>
+<br>
+<a href="{{ route('customers.index') }}">Voltar</a>
 
 </body>
 </html>

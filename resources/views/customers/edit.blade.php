@@ -7,34 +7,23 @@
 </head>
 <body>
 
-    <h1>Editar Cliente</h1>
+<h1>Editar Cliente</h1>
 
-    <form action="{{ route('customers.update', $customer->id) }}" 
-          method="POST"
-          style="display: flex; flex-direction: column; gap: 10px; width: 300px;">
+<form action="{{ route('customers.update', $customer->id) }}" method="POST">
+    @csrf
+    @method('PUT')
 
-        @csrf
-        @method('PUT')
+    <label>Nome:</label><br>
+    <input type="text" name="name" value="{{ $customer->name }}" required><br><br>
 
-        <label>
-            Nome:
-            <input type="text" name="name" value="{{ $customer->name }}" required>
-        </label>
+    <label>Telefone:</label><br>
+    <input type="text" name="phone" value="{{ $customer->phone }}" required><br><br>
 
-        <label>
-            Telefone:
-            <input type="text" name="phone" value="{{ $customer->phone }}" required>
-        </label>
+    <button type="submit">Salvar Alterações</button>
+</form>
 
-        <label>
-            Placa do veículo:
-            <input type="text" name="vehicle_plate" value="{{ $customer->vehicle_plate }}" required>
-        </label>
-
-        <button type="submit" style="padding: 8px; background: black; color: white; border: none;">
-            Atualizar
-        </button>
-    </form>
+<br>
+<a href="{{ route('customers.index') }}">Voltar</a>
 
 </body>
 </html>
