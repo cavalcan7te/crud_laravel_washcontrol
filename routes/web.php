@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\VehicleController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\EmployeeController;
 
@@ -23,6 +24,7 @@ Route::middleware('auth')->group(function () {
 Route::resource('customers',CustomerController::class);
 Route::resource('services',ServiceController::class);
 Route::resource('employees',EmployeeController::class);
+Route::resource('vehicles', VehicleController::class);
 
 
 require __DIR__.'/auth.php';
