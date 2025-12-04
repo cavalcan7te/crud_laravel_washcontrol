@@ -2,63 +2,59 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Schedule;
+use App\Models\Customer;
+use App\Models\Vehicle;
+use App\Models\Employee;
 use Illuminate\Http\Request;
 
 class ScheduleController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $schedules = Schedule::with('customer', 'vehicle', 'employee')->get();
+        return view("schedules.index", compact('schedules'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        $customers = Customer::all();
+        $vehicles = Vehicle::all();
+        $employees = Employee::all();
+
+        return view("schedules.create", compact('customers', 'vehicles', 'employees'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        Schedule::create($request->all());
+        return redirect()->route("schedules.index");
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function edit($id)
     {
-        //
+        $schedule = Schedule::findOrFail($id);
+
+        $customers = Customer::all();
+        $vehicles = Vehicle::all();
+        $employees = Employee::all();
+
+        return view("schedules.edit", compact('schedule', 'customers', 'vehicles', 'employees'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function update(Request $request, $id)
     {
-        //
+        $schedule = Schedule::findOrFail($id);
+        $schedule->update($request->all());
+
+        return redirect()->route("schedules.index");
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function destroy($id)
     {
-        //
-    }
+        $schedule = Schedule::findOrFail($id);
+        $schedule->delete();
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return redirect()->route("schedules.index");
     }
 }
