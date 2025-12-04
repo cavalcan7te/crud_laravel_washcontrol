@@ -6,6 +6,7 @@ use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\VehicleController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\ScheduleController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -25,6 +26,7 @@ Route::resource('customers',CustomerController::class);
 Route::resource('services',ServiceController::class);
 Route::resource('employees',EmployeeController::class);
 Route::resource('vehicles', VehicleController::class);
+Route::resource("schedules", ScheduleController::class);
 
 
 require __DIR__.'/auth.php';
