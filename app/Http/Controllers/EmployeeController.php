@@ -9,7 +9,7 @@ class EmployeeController extends Controller
 {
     public function index()
     {
-        $employees = Employee::all();
+        $employees = Employee::where('user_id', auth()->id())->get();
         return view("employees.index", compact('employees'));
     }
 
@@ -20,6 +20,10 @@ class EmployeeController extends Controller
 
     public function store(Request $request)
     {
+        $request->merge([
+            'user_id' => auth()->id()
+        ]);
+        
         Employee::create($request->all());
         return redirect()->route("employees.index");
     }
@@ -37,6 +41,10 @@ class EmployeeController extends Controller
 
     public function update(Request $request, string $id)
     {
+        $request->merge([
+            'user_id' => auth()->id()
+        ]);
+
         $employee = Employee::findOrFail($id);
         $employee->update($request->all());
         return redirect()->route("employees.index");
