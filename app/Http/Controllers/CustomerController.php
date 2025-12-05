@@ -13,7 +13,7 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        $customers = Customer::all();
+        $customers = Customer::where('user_id', auth()->id())->get();
         return view("customers.index", compact('customers'));
     }
 
@@ -30,6 +30,10 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
+        $request->merge([
+            'user_id' => auth()->id()
+        ]);
+        
         Customer::create($request->all());
         return redirect()->route("customers.index");
     }
@@ -56,6 +60,10 @@ class CustomerController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $request->merge([
+            'user_id' => auth()->id()
+        ]);
+
         $customer = Customer::findOrfail($id);
         $customer->update($request->all());
         return redirect()->route("customers.index");
