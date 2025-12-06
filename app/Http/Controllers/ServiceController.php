@@ -13,7 +13,7 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        $services = Service::all();
+        $services = Service::where('user_id', auth()->id())->get();
         return view("services.index", compact('services'));
     }
 
@@ -30,6 +30,10 @@ class ServiceController extends Controller
      */
     public function store(Request $request)
     {
+        $request->merge([
+            'user_id' => auth()->id()
+        ]);
+
         Service::create($request->all());
         return redirect()->route("services.index");
     }
@@ -56,6 +60,10 @@ class ServiceController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $request->merge([
+            'user_id' => auth()->id()
+        ]);
+        
         $service = Service::findOrfail($id);
         $service->update($request->all());
         return redirect()->route("services.index");
