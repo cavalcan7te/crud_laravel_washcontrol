@@ -12,21 +12,28 @@ class ScheduleController extends Controller
 {
     public function index()
     {
-        $schedules = Schedule::with('customer', 'vehicle', 'employee')->get();
-        return view("schedules.index", compact('schedules'));
+        $schedules = Schedule::where('user_id', auth()->id())->get();
+        $customers = Customer::where('user_id', auth()->id())->get();
+        $vehicles = Vehicle::where('user_id', auth()->id())->get();
+        $employees = Employee::where('user_id', auth()->id())->get();
+        return view("schedules.index", compact('schedules', 'customers', 'vehicles', 'employees'));
     }
 
     public function create()
     {
-        $customers = Customer::all();
-        $vehicles = Vehicle::all();
-        $employees = Employee::all();
+        $customers = Customer::where('user_id', auth()->id())->get();
+        $vehicles = Vehicle::where('user_id', auth()->id())->get();
+        $employees = Employee::where('user_id', auth()->id())->get();
 
         return view("schedules.create", compact('customers', 'vehicles', 'employees'));
     }
 
     public function store(Request $request)
     {
+        $request->merge([
+            'user_id' => auth()->id()
+        ]);
+
         Schedule::create($request->all());
         return redirect()->route("schedules.index");
     }
@@ -44,6 +51,10 @@ class ScheduleController extends Controller
 
     public function update(Request $request, $id)
     {
+        $request->merge([
+            'user_id' => auth()->id()
+        ]);
+        
         $schedule = Schedule::findOrFail($id);
         $schedule->update($request->all());
 
