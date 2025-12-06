@@ -13,5 +13,6 @@ class Customer extends Model
         'name',
         'phone',
         'vehicle_plate',
+        'user_id'
     ];
 }
