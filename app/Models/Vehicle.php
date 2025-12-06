@@ -18,6 +18,7 @@ class Vehicle extends Model
         'color',
         'type',
         'notes',
+        'user_id'
     ];
 
     public function customer()

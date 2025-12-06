@@ -13,5 +13,6 @@ class Employee extends Model
         'name',
         'phone',
         'role',
+        'user_id'
     ];
 }

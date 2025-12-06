@@ -15,6 +15,7 @@ class Schedule extends Model
         'price',
         'status',
         'notes',
+        'user_id'
     ];
 
     // RELACIONAMENTOS
