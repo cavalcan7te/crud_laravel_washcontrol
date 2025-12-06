@@ -11,7 +11,8 @@ return new class extends Migration
         Schema::create('schedules', function (Blueprint $table) {
             $table->id();
 
-            // FKs
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+
             $table->foreignId('customer_id')->constrained()->cascadeOnDelete();
             $table->foreignId('vehicle_id')->constrained()->cascadeOnDelete();
             $table->foreignId('employee_id')->constrained()->cascadeOnDelete();
