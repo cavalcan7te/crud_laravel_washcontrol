@@ -7,6 +7,21 @@
 </head>
 <body>
 
+<nav>
+    <a href="{{ route('services.index') }}">Serviços</a>
+    <a href="{{ route('schedules.index') }}">Agendar</a>
+    <a href="{{ route('vehicles.index') }}">Veículos registrados</a>
+    <a href="{{ route('customers.index') }}">Clientes registrados</a>
+    <a href="{{ route('employees.index') }}">Funcionários cadastrados</a>
+       <form method="POST" action="{{ route('logout') }}">
+            @csrf
+            <button type="submit" class="text-white bg-red-500 px-3 py-1 rounded hover:bg-red-600">
+                Logout
+            </button>
+        </form>
+
+</nav>
+
 <h1>Lista de Clientes</h1>
 
 <table border="1" cellpadding="8" cellspacing="0" style="width:100%; border-collapse: collapse;">

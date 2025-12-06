@@ -6,6 +6,16 @@
     <title>Veículos</title>
 </head>
 <body>
+
+<nav>
+    <a href="{{ route('services.index') }}">Serviços</a>
+    <a href="{{ route('schedules.index') }}">Agendar</a>
+    <a href="{{ route('vehicles.index') }}">Veículos registrados</a>
+    <a href="{{ route('customers.index') }}">Clientes registrados</a>
+    <a href="{{ route('employees.index') }}">Funcionários cadastrados</a>
+
+</nav>
+
     <h1>LISTA DE VEÍCULOS</h1>
 
     <a href="{{ route('vehicles.create') }}">Cadastrar novo veículo</a>

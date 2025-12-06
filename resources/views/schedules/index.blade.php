@@ -7,6 +7,15 @@
 </head>
 <body>
 
+<nav>
+    <a href="{{ route('services.index') }}">Serviços</a>
+    <a href="{{ route('schedules.index') }}">Agendar</a>
+    <a href="{{ route('vehicles.index') }}">Veículos registrados</a>
+    <a href="{{ route('customers.index') }}">Clientes registrados</a>
+    <a href="{{ route('employees.index') }}">Funcionários cadastrados</a>
+
+</nav>
+
     <h1>AGENDAMENTOS</h1>
 
     <table border="1" cellpadding="8" cellspacing="0" style="width:100%; border-collapse: collapse;">
